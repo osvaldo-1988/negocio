@@ -47,20 +47,17 @@
       color: white;
       text-decoration: none;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
+      cursor: pointer;
     }
     .btn:hover {
       background: #333;
     }
-    .footer {
-      margin-top: auto;
-      width: 100%;
-      padding: 10px;
-      text-align: center;
-      background: #1f1f1f;
-      font-size: 14px;
+    .content {
+      display: none;
+      background-color: #1e1e1e;
+      padding: 10px 15px;
+      border-radius: 8px;
+      font-size: 15px;
     }
     .whatsapp {
       display: flex;
@@ -79,6 +76,14 @@
       font-size: 18px;
       cursor: pointer;
     }
+    .footer {
+      margin-top: auto;
+      width: 100%;
+      padding: 10px;
+      text-align: center;
+      background: #1f1f1f;
+      font-size: 14px;
+    }
   </style>
 </head>
 <body>
@@ -88,10 +93,25 @@
   </header>
 
   <div class="menu">
-    <a class="btn" href="#servicios">Servicios</a>
-    <a class="btn" href="#orden">Solicitar Servicio</a>
-    <a class="btn" href="#seguimiento">Seguimiento de Orden</a>
-    <a class="btn" href="#contacto">Contacto</a>
+    <div class="btn" onclick="toggle('servicios')">Servicios</div>
+    <div class="content" id="servicios">
+      - Electricidad<br>
+      - Plomería<br>
+      - Construcción<br>
+      - Pintura<br>
+      - Diagnóstico y reparación automotriz
+    </div>
+
+    <div class="btn" onclick="window.location='#orden'">Solicitar Servicio</div>
+
+    <div class="btn" onclick="window.location='#seguimiento'">Seguimiento de Orden</div>
+
+    <div class="btn" onclick="toggle('contacto')">Contacto</div>
+    <div class="content" id="contacto">
+      WhatsApp: <a href="https://wa.me/17874579452" target="_blank" style="color:#25D366">787-457-9452</a><br>
+      Email: <a href="mailto:as24.7services@gmail.com" style="color:#4fc3f7">as24.7services@gmail.com</a><br>
+      Teléfono: <a href="tel:+17874579452" style="color:white">787-457-9452</a>
+    </div>
   </div>
 
   <a class="whatsapp" href="https://wa.me/17874579452" target="_blank">WhatsApp: 787-457-9452</a>
@@ -102,6 +122,11 @@
   </div>
 
   <script>
+    function toggle(id) {
+      const el = document.getElementById(id);
+      el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+    }
+
     function toggleDarkMode() {
       const bg = document.body.style.backgroundColor;
       if (bg === 'white') {
