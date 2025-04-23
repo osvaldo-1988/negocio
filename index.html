@@ -49,4 +49,87 @@
         <label for="telefono">Teléfono:</label>
         <input type="tel" id="telefono" required>
         <label for="email">Email:</label>
-        <input type="email" id="email
+        <input type="email" id="email">
+        <label for="direccion">Dirección del Servicio:</label>
+        <input type="text" id="direccion">
+        <label for="tipo">Tipo de Servicio:</label>
+        <select id="tipo">
+          <option value="Handyman">Handyman</option>
+          <option value="Mecánica">Mecánica Automotriz</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <label for="pin">Pin de Google Maps (opcional):</label>
+        <input type="text" id="pin" placeholder="Ej. 18.2602340, -66.8411814">
+        <label for="detalle">Descripción del Trabajo:</label>
+        <textarea id="detalle" rows="5" required></textarea>
+        <button type="submit">Enviar Orden</button>
+      </form>
+      <div class="respuesta" id="respuesta"></div>
+    </section>
+
+    <section id="seguimiento">
+      <h2>Seguimiento de Orden</h2>
+      <input type="text" id="codigo" placeholder="Ej. ORD001">
+      <button onclick="consultarEstado()">Consultar</button>
+      <div class="resultado" id="resultado"></div>
+    </section>
+
+    <section id="contacto">
+      <h2>Contáctanos</h2>
+      <ul>
+        <li><a href="https://wa.me/17874579452" target="_blank">WhatsApp</a></li>
+        <li><a href="mailto:as24.7services@gmail.com">Email</a></li>
+        <li><a href="tel:+17874579452">Llamar: 787-457-9452</a></li>
+      </ul>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 A&S Services LLC</p>
+  </footer>
+
+  <script>
+    function consultarEstado() {
+      const codigo = document.getElementById("codigo").value.trim();
+      if (!codigo) {
+        document.getElementById("resultado").textContent = "Por favor escribe un código.";
+        return;
+      }
+      fetch("https://script.google.com/macros/s/AKfycbzOX_mHYnRIE-4KY8ntlgrqQM8CLwppBwdikffBNYL2wunLpnjR4nbJCy1FNePWCsLdzg/exec?codigo=" + encodeURIComponent(codigo))
+        .then(res => res.text())
+        .then(data => {
+          document.getElementById("resultado").textContent = "Estado: " + data;
+        })
+        .catch(() => {
+          document.getElementById("resultado").textContent = "❌ Error al consultar.";
+        });
+    }
+
+    document.getElementById("ordenForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      const datos = {
+        nombre: document.getElementById("nombre").value,
+        telefono: document.getElementById("telefono").value,
+        email: document.getElementById("email").value,
+        direccion: document.getElementById("direccion").value,
+        tipo: document.getElementById("tipo").value,
+        pin: document.getElementById("pin").value,
+        detalle: document.getElementById("detalle").value
+      };
+      fetch("https://script.google.com/macros/s/AKfycbytNyGBjcp4wtLsdxznz8lH1N4McBuJjTThIzt4DqUSEANQz_1f881GTaK5hWByqQodHw/exec", {
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(res => res.text())
+      .then(response => {
+        document.getElementById("respuesta").textContent = "✅ Orden enviada. Tu código es: " + response;
+        document.getElementById("ordenForm").reset();
+      })
+      .catch(() => {
+        document.getElementById("respuesta").textContent = "❌ Error al enviar la orden.";
+      });
+    });
+  </script>
+</body>
+</html>
