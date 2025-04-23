@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8" />
@@ -6,47 +6,29 @@
   <title>A&S Services LLC</title>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600&display=swap" rel="stylesheet">
   <style>
-    body { font-family: 'Poppins', sans-serif; margin: 0; padding: 0; background: #f2f2f2; color: #222; }
-    header { background: white; text-align: center; padding: 1em 0; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-    .logo-container { padding: 1em; }
-    .logo { max-width: 100px; display: block; margin: 0 auto; }
-    h1 { margin: 0.2em 0 0.1em; font-weight: 600; }
-    .tagline { margin-top: 0; font-style: italic; color: #555; }
+    body { font-family: 'Poppins', sans-serif; background: #f2f2f2; margin: 0; padding: 0; }
+    header, footer { background: #fff; text-align: center; padding: 1em 0; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
     nav a { margin: 0 10px; text-decoration: none; color: #003366; font-weight: bold; }
     nav a:hover { color: #ff6600; }
-    main { padding: 1em; max-width: 800px; margin: auto; }
+    main { padding: 2em; max-width: 800px; margin: auto; }
     section { margin-bottom: 2.5em; }
-    h2 { color: #003366; border-bottom: 2px solid #ccc; padding-bottom: 5px; }
-    ul { padding-left: 1.2em; }
-    ul li::marker { color: #003366; }
-    input, textarea, select {
-      width: 100%; padding: 10px; margin-top: 5px;
-      border-radius: 5px; border: 1px solid #ccc;
-    }
-    button {
-      background: red; color: white;
-      border: none; padding: 10px 20px;
-      font-size: 16px; border-radius: 5px;
-      margin-top: 20px; cursor: pointer;
-    }
+    form { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
+    input, textarea, select { width: 100%; padding: 10px; margin-top: 5px; border-radius: 5px; border: 1px solid #ccc; }
+    button { background: red; color: white; border: none; padding: 10px 20px; font-size: 16px; border-radius: 5px; margin-top: 20px; cursor: pointer; }
     button:hover { background: darkred; }
-    .respuesta, .resultado { text-align: center; margin-top: 20px; font-weight: bold; }
+    .respuesta, .resultado { text-align: center; margin-top: 20px; font-weight: bold; font-size: 18px; }
     .hidden { display: none; }
-    footer { background: #222; color: white; text-align: center; padding: 1em; }
   </style>
 </head>
 <body>
   <header>
-    <div class="logo-container">
-      <img src="logo.png" alt="Logo A&S" class="logo" />
-    </div>
     <h1>A&S SERVICES LLC</h1>
     <p class="tagline">Servicio de Handyman & Técnico Automotriz en PR</p>
     <nav>
       <a href="#servicios">Servicios</a>
-      <a href="#contacto">Contáctanos</a>
-      <a href="#quienes">Quiénes somos</a>
-      <a href="#orden">Orden</a>
+      <a href="#orden">Solicitar Servicio</a>
+      <a href="#seguimiento">Seguimiento</a>
+      <a href="#contacto">Contacto</a>
     </nav>
   </header>
 
@@ -54,121 +36,17 @@
     <section id="servicios">
       <h2>Servicios</h2>
       <ul>
-        <li>Electricidad, Plomería, Construcción, Ebanistería</li>
-        <li>Pintura, Soldadura, Mantenimiento General</li>
-        <li>Diagnóstico y Reparación de Vehículos</li>
-        <li>Flotas Comerciales, Generadores</li>
+        <li>Electricidad, Plomería, Construcción, Pintura</li>
+        <li>Diagnóstico, Reparación, Mantenimiento de autos</li>
       </ul>
-    </section>
-
-    <section id="contacto">
-      <h2>Contáctanos</h2>
-      <ul>
-        <li><a href="https://wa.me/17874579452" target="_blank">WhatsApp</a></li>
-        <li><a href="mailto:as24.7services@gmail.com">as24.7services@gmail.com</a></li>
-        <li><a href="tel:+17874579452">787-457-9452</a></li>
-      </ul>
-    </section>
-
-    <section id="quienes">
-      <h2>¿Quiénes somos?</h2>
-      <p>Somos un equipo comprometido con brindar soluciones confiables en el hogar y vehículos. Calidad, rapidez y compromiso.</p>
     </section>
 
     <section id="orden">
-      <h2>¿Qué deseas hacer?</h2>
-      <button onclick="mostrar('formulario')">Enviar nueva solicitud</button>
-      <button onclick="mostrar('seguimiento')">Ver estado de orden</button>
-
-      <div id="formulario" class="hidden">
-        <h3>Formulario de Solicitud</h3>
-        <form id="ordenForm">
-          <label>Nombre:</label><input type="text" id="nombre" required>
-          <label>Teléfono:</label><input type="tel" id="telefono" required>
-          <label>Email:</label><input type="email" id="email">
-          <label>Dirección del Servicio:</label><input type="text" id="direccion">
-          <label>Tipo de Servicio:</label>
-          <select id="tipo">
-            <option value="Handyman">Handyman</option>
-            <option value="Mecánica">Mecánica</option>
-            <option value="Otro">Otro</option>
-          </select>
-          <label>Pin Google Maps:</label><input type="text" id="pin">
-          <label>Descripción del Trabajo:</label><textarea id="detalle" required></textarea>
-          <button type="submit">Enviar Orden</button>
-        </form>
-        <div class="respuesta" id="respuestaOrden"></div>
-      </div>
-
-      <div id="seguimiento" class="hidden">
-        <h3>Seguimiento</h3>
-        <input type="text" id="codigo" placeholder="Ej. ORD001">
-        <button onclick="consultarEstado()">Consultar</button>
-        <div class="resultado" id="resultado"></div>
-      </div>
-    </section>
-
-    <section id="emergencia">
-      <a href="tel:+17874579452"><button>Llamar para Emergencia</button></a>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 A&S Services LLC</p>
-  </footer>
-
-  <script>
-    function mostrar(id) {
-      document.getElementById("formulario").classList.add("hidden");
-      document.getElementById("seguimiento").classList.add("hidden");
-      document.getElementById(id).classList.remove("hidden");
-    }
-
-    function consultarEstado() {
-      const codigo = document.getElementById("codigo").value.trim();
-      if (!codigo) {
-        document.getElementById("resultado").textContent = "Por favor escribe un código.";
-        return;
-      }
-      fetch("https://script.google.com/macros/s/AKfycbzAF1hCo-qVd_4qmfca9OVH7ZRc3zF5tUobzJsgHwuOPA4taeoQgj-vLuzQd_JG-LGcIw/exec?codigo=" + encodeURIComponent(codigo))
-        .then(res => res.text())
-        .then(data => {
-          document.getElementById("resultado").textContent = "Estado: " + data;
-        })
-        .catch(error => {
-          document.getElementById("resultado").textContent = "Error al consultar.";
-        });
-    }
-
-    document.getElementById("ordenForm").addEventListener("submit", function(e) {
-      e.preventDefault();
-      const datos = {
-        nombre: document.getElementById("nombre").value,
-        telefono: document.getElementById("telefono").value,
-        email: document.getElementById("email").value,
-        direccion: document.getElementById("direccion").value,
-        tipo: document.getElementById("tipo").value,
-        pin: document.getElementById("pin").value,
-        detalle: document.getElementById("detalle").value
-      };
-
-      fetch("https://script.google.com/macros/s/AKfycbzAF1hCo-qVd_4qmfca9OVH7ZRc3zF5tUobzJsgHwuOPA4taeoQgj-vLuzQd_JG-LGcIw/exec", {
-        method: "POST",
-        body: JSON.stringify(datos),
-        headers: {
-          "Content-Type": "application/json"
-        }
-      })
-      .then(res => res.text())
-      .then(response => {
-        document.getElementById("respuestaOrden").textContent = "Orden enviada. Tu código es: " + response;
-        document.getElementById("ordenForm").reset();
-      })
-      .catch(() => {
-        document.getElementById("respuestaOrden").textContent = "Error al enviar la orden.";
-      });
-    });
-  </script>
-</body>
-</html>
- 
+      <h2>Solicitud de Servicio</h2>
+      <form id="ordenForm">
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" required>
+        <label for="telefono">Teléfono:</label>
+        <input type="tel" id="telefono" required>
+        <label for="email">Email:</label>
+        <input type="email" id="email
