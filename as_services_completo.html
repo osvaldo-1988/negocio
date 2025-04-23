@@ -116,7 +116,8 @@
         pin: document.getElementById("pin").value,
         detalle: document.getElementById("detalle").value
       };
-      fetch("https://script.google.com/macros/s/AKfycbzAF1hCo-qVd_4qmfca9OVH7ZRc3zF5tUobzJsgHwuOPA4taeoQgj-vLuzQd_JG-LGcIw/exec", {
+     fetch("https://script.google.com/macros/s/AKfycbzOX_mHYnRIE-4KY8ntlgrqQM8CLwppBwdikffBNYL2wunLpnjR4nbJCy1FNePWCsLdzg/exec", {
+
         method: "POST",
         body: JSON.stringify(datos),
         headers: { "Content-Type": "application/json" }
