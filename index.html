@@ -100,6 +100,7 @@
     }
   </style>
 </head>
+
 <body>
   <header>
     <img src="logo_AS_Services.png" alt="Logo A&S" />
@@ -157,7 +158,7 @@
     &copy; 2025 A&S Services LLC
   </div>
 
-  <script>
+<script>
     function toggle(id) {
       const el = document.getElementById(id);
       el.style.display = (el.style.display === 'block') ? 'none' : 'block';
@@ -166,8 +167,7 @@
       ['formulario', 'seguimiento', 'servicios', 'contacto'].forEach(function(section) {
         if (section !== id) document.getElementById(section).style.display = 'none';
       });
-      const el = document.getElementById(id);
-      el.style.display = 'block';
+      document.getElementById(id).style.display = 'block';
     }
     function toggleDarkMode() {
       const bg = document.body.style.backgroundColor;
@@ -179,11 +179,35 @@
         document.body.style.color = 'black';
       }
     }
+
+    // Formulario conexión real
     document.getElementById("ordenForm").addEventListener("submit", function(e) {
       e.preventDefault();
-      document.getElementById("respuesta").innerHTML = "✅ Solicitud enviada (simulado).";
-      document.getElementById("ordenForm").reset();
+      const datos = {
+        nombre: document.getElementById("nombre").value,
+        telefono: document.getElementById("telefono").value,
+        email: document.getElementById("email").value,
+        direccion: document.getElementById("direccion").value,
+        tipo: document.getElementById("tipo").value,
+        pin: document.getElementById("pin").value,
+        detalle: document.getElementById("detalle").value
+      };
+      fetch("https://script.google.com/macros/s/AKfycbytNyGBjcp4wtLsdxznz8lH1N4McBuJjTThIzt4DqUSEANQz_1f881GTaK5hWByqQodHw/exec", {
+        method: "POST",
+        body: JSON.stringify(datos),
+        headers: { "Content-Type": "application/json" }
+      })
+      .then(response => response.text())
+      .then(responseText => {
+        document.getElementById("respuesta").innerHTML = "✅ Orden enviada correctamente. Tu código es: " + responseText;
+        document.getElementById("ordenForm").reset();
+      })
+      .catch(error => {
+        console.error('Error:', error);
+        document.getElementById("respuesta").innerHTML = "❌ Error al enviar la orden.";
+      });
     });
+
     function consultarEstado() {
       const codigo = document.getElementById("codigo").value.trim();
       if (codigo) {
@@ -192,6 +216,7 @@
         document.getElementById("resultado").textContent = "Por favor escribe un código.";
       }
     }
-  </script>
+</script>
+
 </body>
 </html>
