@@ -52,12 +52,26 @@
     .btn:hover {
       background: #333;
     }
-    .content {
+    .content, .formulario, .seguimiento {
       display: none;
       background-color: #1e1e1e;
-      padding: 10px 15px;
+      padding: 15px;
       border-radius: 8px;
       font-size: 15px;
+      margin-top: 10px;
+    }
+    input, textarea, select, button {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border-radius: 5px;
+      border: none;
+      font-size: 15px;
+    }
+    button {
+      background: #ff6600;
+      color: white;
+      cursor: pointer;
     }
     .whatsapp {
       display: flex;
@@ -102,9 +116,31 @@
       - Diagnóstico y reparación automotriz
     </div>
 
-    <div class="btn" onclick="window.location='#orden'">Solicitar Servicio</div>
+    <div class="btn" onclick="showForm('formulario')">Solicitar Servicio</div>
+    <div class="formulario" id="formulario">
+      <form id="ordenForm">
+        <input type="text" id="nombre" placeholder="Nombre" required>
+        <input type="text" id="telefono" placeholder="Teléfono" required>
+        <input type="email" id="email" placeholder="Email">
+        <input type="text" id="direccion" placeholder="Dirección del Servicio">
+        <select id="tipo">
+          <option value="Handyman">Handyman</option>
+          <option value="Mecánica">Mecánica Automotriz</option>
+          <option value="Otro">Otro</option>
+        </select>
+        <input type="text" id="pin" placeholder="Pin de Google Maps (opcional)">
+        <textarea id="detalle" placeholder="Descripción del Trabajo" rows="4" required></textarea>
+        <button type="submit">Enviar Orden</button>
+      </form>
+      <div id="respuesta" style="text-align:center; margin-top:10px;"></div>
+    </div>
 
-    <div class="btn" onclick="window.location='#seguimiento'">Seguimiento de Orden</div>
+    <div class="btn" onclick="showForm('seguimiento')">Seguimiento de Orden</div>
+    <div class="seguimiento" id="seguimiento">
+      <input type="text" id="codigo" placeholder="Ej. ORD001">
+      <button onclick="consultarEstado()">Consultar Estado</button>
+      <div id="resultado" style="text-align:center; margin-top:10px;"></div>
+    </div>
 
     <div class="btn" onclick="toggle('contacto')">Contacto</div>
     <div class="content" id="contacto">
@@ -126,7 +162,13 @@
       const el = document.getElementById(id);
       el.style.display = (el.style.display === 'block') ? 'none' : 'block';
     }
-
+    function showForm(id) {
+      ['formulario', 'seguimiento', 'servicios', 'contacto'].forEach(function(section) {
+        if (section !== id) document.getElementById(section).style.display = 'none';
+      });
+      const el = document.getElementById(id);
+      el.style.display = 'block';
+    }
     function toggleDarkMode() {
       const bg = document.body.style.backgroundColor;
       if (bg === 'white') {
@@ -135,6 +177,19 @@
       } else {
         document.body.style.backgroundColor = 'white';
         document.body.style.color = 'black';
+      }
+    }
+    document.getElementById("ordenForm").addEventListener("submit", function(e) {
+      e.preventDefault();
+      document.getElementById("respuesta").innerHTML = "✅ Solicitud enviada (simulado).";
+      document.getElementById("ordenForm").reset();
+    });
+    function consultarEstado() {
+      const codigo = document.getElementById("codigo").value.trim();
+      if (codigo) {
+        document.getElementById("resultado").textContent = "Estado de orden " + codigo + ": En proceso.";
+      } else {
+        document.getElementById("resultado").textContent = "Por favor escribe un código.";
       }
     }
   </script>
